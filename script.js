@@ -1,10 +1,10 @@
 const container = document.querySelector('.container');
-const gridSize = 50;
+let gridSize = 5;
 
 const grid = document.createElement('div');
 grid.classList.add('grid');
-grid.style.height = "400px";
-grid.style.width = "400px";
+grid.style.height = "450px";
+grid.style.width = "450px";
 grid.style.border = "solid 5px pink";
 
 const button = document.createElement('button');
@@ -19,14 +19,22 @@ button.textContent = "Choose grid size";
 container.appendChild(button);
 container.appendChild(grid);
 
+button.addEventListener('mouseover', () => {
+    button.style.cursor = "pointer";
+});
+
+
+
 function drawGrid() {
-    for (let i = 0; i < 16; i++) {
-        for (let j = 0; j < 16; j++) {
+    grid.replaceChildren();
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            const cellSize = 450 / gridSize;
             const cell = document.createElement('div');
             cell.classList.add('cell');
             cell.style.backgroundColor = "lightgrey";
-            cell.style.height = "25px";
-            cell.style.width = "25px";
+            cell.style.height = cellSize + "px";
+            cell.style.width = cellSize + "px";
             grid.appendChild(cell);
             cell.addEventListener('mouseover', () => {
                 cell.style.cursor = "pointer";
@@ -36,13 +44,9 @@ function drawGrid() {
     };
 };
 
-button.addEventListener('mouseover', () => {
-    button.style.cursor = "pointer";
-});
-
 button.addEventListener('click', (e) => {
-    let gridNumber = prompt("Please enter a number up to 100", "50");
-    if (gridNumber > 100) {
+     gridSize = prompt("Please enter a number up to 100", "5");
+    if (gridSize > 100) {
         alert("Please enter a number between 1 and 100");
     }
     else {
